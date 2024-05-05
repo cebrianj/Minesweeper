@@ -43,21 +43,33 @@ class Board:
         self.__board[row_idx][col_idx] = content
 
     def __get_nearby_mines_count(self, position: BoardPosition) -> int:
-        nearby_cols_range: Range = Range(
-            start=max(position.col_idx - 1, 0),
-            end=min(position.col_idx + 1, self.__size - 1),
-        )
-        nearby_rows_range: Range = Range(
-            start=max(position.row_idx - 1, 0),
-            end=min(position.row_idx + 1, self.__size - 1),
+        nearby_positions = self.__get_nearby_positions(position)
+        return sum(
+            (
+                1
+                for position in nearby_positions
+                if self.__get_cell_value(position) == CellValue.MINE
+            ),
+            start=0,
         )
 
-        counter = 0
+    def __get_nearby_positions(
+        self, initial_position: BoardPosition
+    ) -> Iterable[BoardPosition]:
+        nearby_cols_range: Range = Range(
+            start=max(initial_position.col_idx - 1, 0),
+            end=min(initial_position.col_idx + 1, self.__size - 1),
+        )
+        nearby_rows_range: Range = Range(
+            start=max(initial_position.row_idx - 1, 0),
+            end=min(initial_position.row_idx + 1, self.__size - 1),
+        )
         for row_idx in range(nearby_rows_range.start, nearby_rows_range.end + 1, 1):
             for col_idx in range(nearby_cols_range.start, nearby_cols_range.end + 1, 1):
-                if self.__get_cell_value_by_idx(row_idx, col_idx) == CellValue.MINE:
-                    counter += 1
-        return counter
+                position = BoardPosition(row_idx, col_idx)
+                if position == initial_position:
+                    pass
+                yield position
 
     @staticmethod
     def __hide_mines(cells: Iterable[CellValue]) -> Iterable[CellValue]:
