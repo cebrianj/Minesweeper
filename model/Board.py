@@ -8,8 +8,8 @@ from model.range import Range
 
 class Board:
     def __init__(self, board: Iterable[Iterable[CellValue]]) -> None:
-        self.__board = [row[:] for row in board]
-        self.__size = len(self.__board)
+        self.__board: list[list[CellValue]] = [row[:] for row in board]
+        self.__size: int = len(self.__board)
 
     def get_representation(self) -> BoardRepresentation:
         return BoardRepresentation(Board.__hide_mines(row) for row in self.__board)
@@ -29,22 +29,22 @@ class Board:
         queue.put(intial_position)
 
         while not queue.empty():
-            position = queue.get()
+            position: BoardPosition = queue.get()
             if position in visited:
                 continue
 
-            cellValue = self.__get_cell_value(position)
+            cellValue: CellValue = self.__get_cell_value(position)
             if cellValue == CellValue.MINE:
                 continue
 
-            nearby_mines_count = self.__get_nearby_mines_count(position)
+            nearby_mines_count: int = self.__get_nearby_mines_count(position)
             self.__set_cell_value(position, CellValue.from_number(nearby_mines_count))
             visited.add(position)
 
             if nearby_mines_count > 0:
                 continue
 
-            unvisisted_nearby_positions = (
+            unvisisted_nearby_positions: Iterable[BoardPosition] = (
                 pos
                 for pos in self.__get_nearby_positions(position)
                 if pos not in visited
@@ -63,7 +63,9 @@ class Board:
         self.__board[row_idx][col_idx] = content
 
     def __get_nearby_mines_count(self, position: BoardPosition) -> int:
-        nearby_positions = self.__get_nearby_positions(position)
+        nearby_positions: Iterable[BoardPosition] = self.__get_nearby_positions(
+            position
+        )
         return sum(
             (
                 1
