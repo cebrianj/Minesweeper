@@ -1,3 +1,4 @@
+from queue import SimpleQueue
 from typing import Iterable
 from model.board_position import BoardPosition
 from model.board_representation import BoardRepresentation
@@ -16,9 +17,41 @@ class Board:
     def discover(self, position: BoardPosition) -> bool:
         if self.__get_cell_value(position) == CellValue.MINE:
             return True
-        cellValue = self.__calculate_cell_value(position)
-        self.__set_cell_value(position, cellValue)
+        self.__discover_bfs(position)
         return False
+
+    def __get_cell_value(self, position: BoardPosition) -> CellValue:
+        return self.__get_cell_value_by_idx(position.row_idx, position.col_idx)
+
+    def __discover_bfs(self, intial_position: BoardPosition) -> None:
+        queue = SimpleQueue()
+        visited = set()
+        queue.put(intial_position)
+
+        while not queue.empty():
+            position = queue.get()
+            if position in visited:
+                continue
+
+            cellValue = self.__get_cell_value(position)
+            if cellValue == CellValue.MINE:
+                continue
+
+            calculatedCellValue = self.__calculate_cell_value(position)
+            self.__set_cell_value(position, calculatedCellValue)
+            visited.add(position)
+
+            if calculatedCellValue.is_numerical():
+                continue
+
+            unvisisted_nearby_positions = (
+                pos
+                for pos in self.__get_nearby_positions(position)
+                if pos not in visited
+            )
+
+            for pos in unvisisted_nearby_positions:
+                queue.put(pos)
 
     def __calculate_cell_value(self, position) -> CellValue:
         nearby_mines_count = self.__get_nearby_mines_count(position)
@@ -29,9 +62,6 @@ class Board:
         )
 
         return cellValue
-
-    def __get_cell_value(self, position: BoardPosition) -> CellValue:
-        return self.__get_cell_value_by_idx(position.row_idx, position.col_idx)
 
     def __get_cell_value_by_idx(self, row_idx: int, col_idx: int) -> CellValue:
         return self.__board[row_idx][col_idx]

@@ -35,3 +35,6 @@ class CellValue(Enum):
             return cls.EIGHT
         else:
             raise ValueError(f"No CellValue found for value {value}")
+
+    def is_numerical(self):
+        return self.value.strip().isdigit()
