@@ -37,11 +37,11 @@ class Board:
             if cellValue == CellValue.MINE:
                 continue
 
-            calculatedCellValue = self.__calculate_cell_value(position)
-            self.__set_cell_value(position, calculatedCellValue)
+            nearby_mines_count = self.__get_nearby_mines_count(position)
+            self.__set_cell_value(position, CellValue.from_number(nearby_mines_count))
             visited.add(position)
 
-            if calculatedCellValue.is_numerical():
+            if nearby_mines_count > 0:
                 continue
 
             unvisisted_nearby_positions = (
@@ -52,16 +52,6 @@ class Board:
 
             for pos in unvisisted_nearby_positions:
                 queue.put(pos)
-
-    def __calculate_cell_value(self, position) -> CellValue:
-        nearby_mines_count = self.__get_nearby_mines_count(position)
-        cellValue = (
-            CellValue.from_numerical_value(nearby_mines_count)
-            if nearby_mines_count > 0
-            else CellValue.TOUCHED
-        )
-
-        return cellValue
 
     def __get_cell_value_by_idx(self, row_idx: int, col_idx: int) -> CellValue:
         return self.__board[row_idx][col_idx]
