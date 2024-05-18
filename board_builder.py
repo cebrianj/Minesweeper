@@ -1,6 +1,7 @@
 import random
-from model.cell_value import *
 from model.board import Board
+from model.cell_value import *
+
 
 MAX_SIZE = 128
 
@@ -25,7 +26,7 @@ class BoardBuilder:
         self.__mines = mines
         return self
 
-    def build(self) -> Board:
+    def build(self) -> "Board":
         self.__board = BoardBuilder.__build_empty_board(self.__size)
         BoardBuilder.__place_mines_in_board(self.__board, self.__mines)
         return Board(self.__board)

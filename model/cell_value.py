@@ -2,6 +2,7 @@ from enum import Enum
 
 
 class CellValue(Enum):
+    EXPLOSION = -4
     MINE = -3
     FLAG = -2
     UNTOUCHED = -1

@@ -4,6 +4,7 @@ from model.cell_value import CellValue
 
 class BoardDrawer:
     _CellValue_SymbolMap = {
+        -4: "💥",
         -3: "💣",
         -2: "🚩",
         -1: "🧱",

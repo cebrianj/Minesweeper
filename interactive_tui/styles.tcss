@@ -1,0 +1,56 @@
+InformationPanel{
+    layout: grid;
+    grid-size: 3 1;
+    grid-rows: 1fr;
+    grid-columns: 1fr;
+    height:5;
+    width:100%;
+    border: ascii $accent;
+}
+
+Board{
+    width:100%;  
+    border: ascii $accent;
+    layout: grid;
+    grid-columns: 1fr;
+    grid-rows: 3;
+}
+
+CounterDisplay{
+    height: 100%;    
+    content-align-horizontal: center;
+    content-align-vertical: middle;
+}
+
+TimeDisplay{
+    height: 100%;    
+    content-align-horizontal: center;
+    content-align-vertical: middle;
+}
+
+#reset{
+    height: 15;
+    width: 100%;
+    border: vkey $accent;
+}
+
+
+
+Button{
+    tint: $accent 10%;
+}
+
+Button:hover {
+    tint: $accent 50%;
+}
+
+Button:focus {
+    text-style: none;
+}
+
+.cell{
+    border: none;
+    margin:0;
+    padding: 1;
+    width: 100%;
+}

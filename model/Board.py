@@ -1,5 +1,6 @@
 from queue import SimpleQueue
 from typing import Iterable
+from model.game_status import GameStatus
 from model.board_position import BoardPosition
 from model.board_representation import BoardRepresentation
 from model.cell_value import CellValue
@@ -12,13 +13,32 @@ class Board:
         self.__size: int = len(self.__board)
 
     def get_representation(self) -> BoardRepresentation:
-        return BoardRepresentation(Board.__hide_mines(row) for row in self.__board)
+        if self.check_game_status() == GameStatus.ONGOING:
+            return BoardRepresentation(
+                (Board.__hide_mines(row) for row in self.__board), len(self.__board)
+            )
+        else:
+            return BoardRepresentation(self.__board, len(self.__board))
 
-    def discover(self, position: BoardPosition) -> bool:
-        if self.__get_cell_value(position) == CellValue.MINE:
-            return True
+    def discover(self, position: BoardPosition) -> None:
+        cell_value = self.__get_cell_value(position)
+        if cell_value == CellValue.MINE:
+            self.__set_cell_value(position, CellValue.EXPLOSION)
+            return
+        if cell_value != CellValue.UNTOUCHED:
+            return
         self.__discover_bfs(position)
-        return False
+
+    def check_game_status(self) -> GameStatus:
+        has_untouched_cell = False
+        for row in self.__board:
+            for cell in row:
+                if cell == CellValue.EXPLOSION:
+                    return GameStatus.LOSE
+                if cell == CellValue.UNTOUCHED:
+                    has_untouched_cell = True
+
+        return GameStatus.ONGOING if has_untouched_cell else GameStatus.WIN
 
     def __get_cell_value(self, position: BoardPosition) -> CellValue:
         return self.__get_cell_value_by_idx(position.row_idx, position.col_idx)
@@ -96,7 +116,7 @@ class Board:
     @staticmethod
     def __hide_mines(cells: Iterable[CellValue]) -> Iterable[CellValue]:
         for cell in cells:
-            # if cell == CellValue.MINE:
-            #     yield CellValue.UNTOUCHED
-            # else:
-            yield cell
+            if cell == CellValue.MINE:
+                yield CellValue.UNTOUCHED
+            else:
+                yield cell
