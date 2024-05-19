@@ -1,9 +1,17 @@
 import consts
+from interactive_tui_mananger import InteractiveTUIManager
+from model.ui_type import UIType
+from simple_ui.simple_ui_mananger import SimpleUIManager
 import utils
 from model.game_settings import GameSettings
 
 
 class SimpleSettingsWizard:
+
+    __UI_MANAGERS = {
+        UIType.SIMPLE.value: SimpleUIManager,
+        UIType.TUI.value: InteractiveTUIManager,
+    }
 
     @staticmethod
     def run() -> GameSettings:
@@ -35,5 +43,5 @@ class SimpleSettingsWizard:
 
         settings.board_size = board_size
         settings.mines = max(int(mines_percentage * (board_size**2)), 1)
-        settings.ui_type = interface_type
+        settings.ui_manager_class = SimpleSettingsWizard.__UI_MANAGERS[interface_type]
         return settings

@@ -1,6 +1,5 @@
 from board_builder import BoardBuilder
 
-from interactive_tui_mananger import InteractiveTUIManager
 from interactive_tui.execution_result import ExecutionResult
 from simple_settings_wizard import SimpleSettingsWizard
 
@@ -14,8 +13,7 @@ def start_game():
             .set_mines(settings.mines)
             .build()
         )
-
-        app = InteractiveTUIManager(
+        app = settings.ui_manager_class(
             board.discover, board.get_representation, board.check_game_status
         )
         execution_result = app.run()
