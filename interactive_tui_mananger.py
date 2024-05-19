@@ -13,18 +13,14 @@ class InteractiveTUIManager(UIManager):
         discover_position: Callable[[BoardPosition], bool],
         get_board_representation: Callable[[None], BoardRepresentation],
         check_game_status: Callable[[None], GameStatus],
-        restart_game: Callable[[None], None],
     ):
         self.discover_position = discover_position
         self.get_board_representation = get_board_representation
         self.check_game_status = check_game_status
-        self.restart_game = restart_game
-        super().__init__(
-            discover_position, get_board_representation, check_game_status, restart_game
-        )
+        super().__init__(discover_position, get_board_representation, check_game_status)
 
-    def run(self) -> None:
-        result = (
+    def run(self) -> ExecutionResult:
+        return (
             MineSweeperApp()
             .initialize(
                 self.discover_position,
@@ -33,6 +29,3 @@ class InteractiveTUIManager(UIManager):
             )
             .run()
         )
-
-        if result is ExecutionResult.RESTART:
-            self.restart_game()
