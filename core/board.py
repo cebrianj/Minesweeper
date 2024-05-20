@@ -1,10 +1,10 @@
 from queue import SimpleQueue
 from typing import Iterable
-from model.game_status import GameStatus
-from model.board_position import BoardPosition
-from model.board_representation import BoardRepresentation
-from model.cell_value import CellValue
-from model.range import Range
+from core.model.game_status import GameStatus
+from core.model.board_position import BoardPosition
+from core.model.board_representation import BoardRepresentation
+from core.model.cell_value import CellValue
+from core.model.range import Range
 
 
 class Board:

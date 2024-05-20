@@ -2,8 +2,8 @@ from typing import Callable
 from textual.widgets import Static, Button
 from textual.app import ComposeResult
 
-from interactive_tui.counter_display import CounterDisplay
-from interactive_tui.time_display import TimeDisplay
+from ui.interactive_tui.counter_display import CounterDisplay
+from ui.interactive_tui.time_display import TimeDisplay
 
 RESET_BTN_ID = "reset"
 

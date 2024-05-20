@@ -1,6 +1,6 @@
 from typing import Iterable
 
-from model.cell_value import CellValue
+from core.model.cell_value import CellValue
 
 
 class BoardRepresentation:

@@ -1,11 +1,11 @@
 from typing import Callable
-from interactive_tui.execution_result import ExecutionResult
-from model.board_position import BoardPosition
-from model.board_representation import BoardRepresentation
-from model.game_status import GameStatus
-from simple_ui.board_drawer import BoardDrawer
-from ui_manager import UIManager
-import utils
+from ui.model.execution_result import ExecutionResult
+from core.model.board_position import BoardPosition
+from core.model.board_representation import BoardRepresentation
+from core.model.game_status import GameStatus
+from ui.simple_ui.board_drawer import BoardDrawer
+from ui.ui_manager import UIManager
+import common.utils as utils
 
 
 class SimpleUIManager(UIManager):

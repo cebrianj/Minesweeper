@@ -1,4 +1,4 @@
-from model.ui_type import UIType
+from ui.model.ui_type import UIType
 
 
 TITLE = """

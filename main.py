@@ -1,10 +1,10 @@
-from board_builder import BoardBuilder
+from core.board_builder import BoardBuilder
 
-from interactive_tui.execution_result import ExecutionResult
-from simple_settings_wizard import SimpleSettingsWizard
+from ui.model.execution_result import ExecutionResult
+from ui.simple_settings_wizard import SimpleSettingsWizard
 
 
-def start_game():
+def run_game():
     settings = SimpleSettingsWizard.run()
     while True:
         board = (
@@ -22,4 +22,4 @@ def start_game():
 
 
 if __name__ == "__main__":
-    start_game()
+    run_game()

@@ -1,9 +1,8 @@
 from dataclasses import dataclass
 from typing import Type
 
-from model.ui_type import UIType
-from simple_ui.simple_ui_mananger import SimpleUIManager
-from ui_manager import UIManager
+from ui.simple_ui.simple_ui_mananger import SimpleUIManager
+from ui.ui_manager import UIManager
 
 
 @dataclass

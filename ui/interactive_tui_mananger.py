@@ -1,10 +1,10 @@
 from typing import Callable
-from interactive_tui.mine_sweeper_app import MineSweeperApp
-from interactive_tui.execution_result import ExecutionResult
-from model.board_position import BoardPosition
-from model.board_representation import BoardRepresentation
-from model.game_status import GameStatus
-from ui_manager import UIManager
+from ui.interactive_tui.mine_sweeper_app import MineSweeperApp
+from ui.model.execution_result import ExecutionResult
+from core.model.board_position import BoardPosition
+from core.model.board_representation import BoardRepresentation
+from core.model.game_status import GameStatus
+from ui.ui_manager import UIManager
 
 
 class InteractiveTUIManager(UIManager):

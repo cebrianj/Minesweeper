@@ -1,6 +1,6 @@
 import random
-from model.board import Board
-from model.cell_value import *
+from core.board import Board
+from core.model.cell_value import CellValue
 
 
 MAX_SIZE = 128

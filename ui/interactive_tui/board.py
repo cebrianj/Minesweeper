@@ -3,8 +3,8 @@ from typing import Callable
 from textual.widgets import Static, Button
 from textual.app import ComposeResult
 
-from model.board_position import BoardPosition
-from model.board_representation import BoardRepresentation
+from core.model.board_position import BoardPosition
+from core.model.board_representation import BoardRepresentation
 
 
 class Board(Static):

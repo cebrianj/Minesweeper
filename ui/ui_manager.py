@@ -1,10 +1,10 @@
 import abc
 from typing import Callable
 
-from interactive_tui.execution_result import ExecutionResult
-from model.board_position import BoardPosition
-from model.board_representation import BoardRepresentation
-from model.game_status import GameStatus
+from ui.model.execution_result import ExecutionResult
+from core.model.board_position import BoardPosition
+from core.model.board_representation import BoardRepresentation
+from core.model.game_status import GameStatus
 
 
 class UIManager(abc.ABC):

@@ -1,14 +1,13 @@
 from typing import Callable
 from textual.app import App, ComposeResult
 from textual.widgets import Header, Footer
-from textual.reactive import Reactive
 
-from interactive_tui.board import Board
-from interactive_tui.information_panel import InformationPanel
-from interactive_tui.execution_result import ExecutionResult
-from model.board_position import BoardPosition
-from model.board_representation import BoardRepresentation
-from model.game_status import GameStatus
+from ui.interactive_tui.board import Board
+from ui.interactive_tui.information_panel import InformationPanel
+from ui.model.execution_result import ExecutionResult
+from core.model.board_position import BoardPosition
+from core.model.board_representation import BoardRepresentation
+from core.model.game_status import GameStatus
 
 
 class MineSweeperApp(App):

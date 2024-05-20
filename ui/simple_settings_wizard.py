@@ -1,9 +1,9 @@
-import consts
-from interactive_tui_mananger import InteractiveTUIManager
-from model.ui_type import UIType
-from simple_ui.simple_ui_mananger import SimpleUIManager
-import utils
-from model.game_settings import GameSettings
+import ui.consts as consts
+from ui.interactive_tui_mananger import InteractiveTUIManager
+from ui.model.ui_type import UIType
+from ui.simple_ui.simple_ui_mananger import SimpleUIManager
+import common.utils as utils
+from ui.model.game_settings import GameSettings
 
 
 class SimpleSettingsWizard:

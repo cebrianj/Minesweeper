@@ -1,6 +1,4 @@
-from model.board import Board
-from model.board_representation import BoardRepresentation
-from model.cell_value import CellValue
+from core.model.board_representation import BoardRepresentation
 
 
 class BoardDrawer:
