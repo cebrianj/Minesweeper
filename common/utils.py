@@ -14,7 +14,7 @@ def get_int_input(prompt, default, min_value, max_value) -> int:
         try:
             user_input = input(prompt)
             value = int(user_input) if user_input != "" else default
-            if min_value <= value <= max_value:
+            if value is not None and min_value <= value <= max_value:
                 return value
             print(f"Please enter a number between {min_value} and {max_value}.")
         except ValueError:
